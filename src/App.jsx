@@ -23,6 +23,8 @@ const App = () => {
       {isAuthenticated ? <Logout /> : <LoginButton />}
       <br />
       <Profile />
+
+      <MovieForm/>
     </div>
   );
 };
