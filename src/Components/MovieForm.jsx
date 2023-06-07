@@ -47,13 +47,6 @@ function MovieForm() {
             year: "",
             language: "",
           }}
-          // validate={(valores) => {
-          //   let errores = {};
-          //   if (!valores.genre) {
-          //     errores.genre = "Please, fill out this field";
-          //   }
-          //   return errores;
-          // }}
           onSubmit={(valores, { resetForm }) => {
             setFormValues(valores);
 
@@ -63,13 +56,11 @@ function MovieForm() {
           {({ values, errors, handleSubmit, handleChange, handleBlur }) => (
             <form
               onSubmit={handleSubmit}
-              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-            >
+              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
               <div className="mb-4">
                 <label
                   htmlFor="genre"
-                  className="block text-gray-700 font-bold mb-2"
-                >
+                  className="block text-gray-700 font-bold mb-2">
                   Género
                 </label>
                 <select
@@ -105,8 +96,7 @@ function MovieForm() {
               <div className="mb-4">
                 <label
                   htmlFor="year"
-                  className="block text-gray-700 font-bold mb-2"
-                >
+                  className="block text-gray-700 font-bold mb-2">
                   Año
                 </label>
                 <input
@@ -122,8 +112,7 @@ function MovieForm() {
               <div className="mb-6">
                 <label
                   htmlFor="language"
-                  className="block text-gray-700 font-bold mb-2"
-                >
+                  className="block text-gray-700 font-bold mb-2">
                   Idioma
                 </label>
                 <select
@@ -134,14 +123,14 @@ function MovieForm() {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 >
                   <option value="">Seleccione un idioma</option>
-                  <option value="es">español</option>
+                  <option value="es">Español</option>
                   <option value="it">Italiano</option>
                   <option value="en">Inglés</option>
                   <option value="ja">Japonés</option>
                   <option value="de">Alemán</option>
                   <option value="fr">Francés</option>
                   <option value="sr">Serbio</option>
-                  <option value="th">tailandés</option>
+                  <option value="th">Tailandés</option>
                   <option value="ko">Coreano</option>
                   <option value="ru">Ruso</option>
                   <option value="pt">Portugués</option>
@@ -169,6 +158,9 @@ function MovieForm() {
           )}
         </Formik>
         <div>
+
+          {/* hacer ternario para ocultar si es que no hay nada - mejorar mensaje si es que no hay peliculas*/}
+
           <div className="grid grid-cols-4 gap-4">
             {movies.results.length <= 0
               ? "no hay nada"
