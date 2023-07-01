@@ -39,7 +39,9 @@ function MovieForm() {
   }, [formValues]);
   return (
     <>
-      <h1 className="text-5xl text-center">Busca una película 🎬🍿</h1>
+<h1 className="text-5xl  font-extrabold text-center font-bold text-dark-blue-700">
+  Busca una película <span role="img" aria-label="Film and popcorn">🎬🍿</span>
+</h1>
       <div className="container">
         <Formik
           initialValues={{
@@ -146,10 +148,10 @@ function MovieForm() {
                   <option value="zh">Chino</option>
                 </select>
               </div>
-              <div className="flex items-center justify-between">
+              <div className="d-flex justify-content-center">
                 <button
                   type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="btn btn-info "
                 >
                   Buscar
                 </button>
@@ -158,38 +160,40 @@ function MovieForm() {
           )}
         </Formik>
         <div>
-
-          {/* hacer ternario para ocultar si es que no hay nada - mejorar mensaje si es que no hay peliculas*/}
-
           <div className="grid grid-cols-4 gap-4">
-            {movies.results.length <= 0
-              ? "no hay nada"
-              : movies.results.map((movie) => {
-                  return (
-                    <div key={movie.id} className="movie-container">
-                      <p className="text-lg font-bold mb-2">
-                        {movie.original_title}
-                      </p>
-                      <a href={streaming(movie.id,'CL')}>
-                        {" "}
-                        <img
-                          src={
-                            "https://image.tmdb.org/t/p/w500/" +
-                            movie.poster_path
-                          }
-                          alt=""
-                          className="w-48 h-auto mb-2 hover:opacity-70 cursor-pointer"
-                        />
-                      </a>
-                      <p>{movie.overview}</p>
-                    </div>
-                  );
-                })}
+            {movies.results.length <= 0 ? (
+              <div className="col-span-4 flex justify-center">
+            <div className="max-w-sm text-center rounded overflow-hidden shadow-lg bg-blue-100">
+          <p className="text-lg font-bold font-extrabold mb-2 text-blue-520">
+        Lo sentimos... <br></br> No se encontró ningún resultado
+        <img
+            src={"https://st2.depositphotos.com/1001911/7684/v/950/depositphotos_76840879-stock-illustration-depressed-emoticon.jpg" }
+            alt=""
+            className="w-full h-auto mb-2 hover:opacity-70 cursor-pointer"
+          />
+          </p>
           </div>
+          </div>
+        ) : (
+         movies.results.map((movie) => {
+          return (
+          <div key={movie.id} className="max-w-sm rounded overflow-hidden shadow-lg">
+          <p className="text-lg font-bold mb-2 block text-center">{movie.original_title}</p>
+          <img
+            src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}
+            alt=""
+            className="w-full h-auto mb-2 hover:opacity-70 cursor-pointer"
+          />
+          <p className="italic font-semibold py-4 px-2">{movie.overview}</p>
+          <a href={streaming(movie.id, 'CL')} className="text-blue-500 hover:text-blue-700 block text-center">VER PELÍCULA</a>
         </div>
+      );}))}  
       </div>
+        </div>
+   </div>
     </>
   );
 }
+
 
 export default MovieForm;

@@ -4,9 +4,10 @@ import "./index.css";
 import Home from "./Components/Home";
 import NotFound from "./Components/NotFound";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./Components/LoginButton";
 import Profile from "./Components/Profile";
-import Logout from "./Components/Logout";
+import LoginUser from "./Components/LoginUser";
+import Inicio from "./Components/Inicio";
+import Registro from "./Components/Registro";
 
 const App = () => {
   const { isAuthenticated,isLoading } = useAuth0();
@@ -19,8 +20,10 @@ const App = () => {
         <Route path="/movieform" element={<MovieForm />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <h1>hola</h1>
-      {isAuthenticated ? <Logout /> : <LoginButton />}
+      <Inicio />
+      <LoginUser />
+      <Registro />
+  
       <br />
       <Profile />
     </div>
