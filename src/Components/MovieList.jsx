@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import SesionContext from '../context/SesionContext';
 
-function MovieList({ sesionInfo }) {
+function MovieList() {
   const [userInfo, setUserInfo] = useState(null);
+  const { sesionInfo } = useContext(SesionContext); // Obtener sesionInfo del contexto
 
   useEffect(() => {
     const fetchUserInfo = async () => {
