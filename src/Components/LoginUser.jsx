@@ -1,8 +1,9 @@
-import { useFormik } from "formik";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import SesionContext from "../context/SesionContext";
+import { useFormik } from 'formik';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import SesionContext from '../context/SesionContext';
+import { Link } from 'react-router-dom';
 
 const LoginUser = () => {
   const navigate = useNavigate();
@@ -109,18 +110,39 @@ const LoginUser = () => {
           )}
         </div>
         <div className="flex items-center justify-center">
-          <button
+          <Link
+            to="/movieform"
             className="bg-customColor hover:bg-opacity-75 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
             disabled={formik.isSubmitting}
           >
             Ingresar
-          </button>
+          </Link>
         </div>
+
+
         {formik.status && (
           <p className="text-red-500 text-sm mt-1">{formik.status}</p>
         )}
+
+
       </form>
+
+      <footer className="bg-gray-200 py-4 fixed bottom-0 left-0 w-full">
+        <div className="container mx-auto px-4 text-center">
+          <div className="text-gray-600 text-sm">
+            <Link to="/condition" className="text-gray-600 hover:text-gray-800">
+              Términos y condiciones
+            </Link>{" "}
+            |{" "}
+            <Link to="/manual" className="text-gray-600 hover:text-gray-800">
+              Manual de usuario
+            </Link>
+            {" "} | Desarrollado por{" "}
+            <span className="font-semibold">Esteban Muñoz y María Paz Valenzuela</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
