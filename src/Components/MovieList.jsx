@@ -24,7 +24,7 @@ function MovieList() {
       <h1>Lista de las películas guardadas</h1>
       {userInfo ? (
         <div>
-          <h2>Información del usuario:</h2>
+          <h2>Esta es tu lista de peliculas</h2>
           <p>ID: {userInfo.id}</p>
           <p>Username: {userInfo.username}</p>
           <p>Email: {userInfo.email}</p>
