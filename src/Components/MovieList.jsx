@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import SesionContext from '../context/SesionContext';
+import LoginNavBar from './LoginNavBar';
 
 function MovieList() {
   const [userInfo, setUserInfo] = useState(null);
@@ -21,6 +22,7 @@ function MovieList() {
 
   return (
     <div>
+      <LoginNavBar/>
       <h1>Lista de las películas guardadas</h1>
       {userInfo ? (
         <div>
