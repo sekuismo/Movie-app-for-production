@@ -34,11 +34,7 @@ const LoginUser = () => {
             Nombre de usuario
           </label>
           <input
-<<<<<<< HEAD
-            className="border-b-2 border-red-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-=======
             className="border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
->>>>>>> origin/developMp
             id="username"
             name="username"
             type="text"
@@ -78,8 +74,4 @@ const LoginUser = () => {
   );
 };
 
-<<<<<<< HEAD
 export default LoginUser;
-=======
-export default LoginUser;
->>>>>>> origin/developMp
