@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import LoginNavBar from "./LoginNavBar";
 
 
 function MovieForm() {
-  function randomPage(min, max) {
+  function randomPage(min, max) { 
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
@@ -40,7 +41,8 @@ function MovieForm() {
   }, [formValues]);
   return (
     <>
-<h1 className="text-5xl  font-extrabold text-center font-bold text-dark-blue-700">
+    <LoginNavBar/>
+<h1 className="text-5xl  font-extrabold text-center font-bold text-dark-blue-700 m-3 p-3">
   Busca una película <span role="img" aria-label="Film and popcorn">🎬🍿</span>
 </h1>
       <div className="container">

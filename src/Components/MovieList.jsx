@@ -10,19 +10,22 @@ function MovieList() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/v1/users/${sesionInfo.user_id}`);
+        const response = await axios.get(`http://localhost:8000/api/v1/users/${sesionInfo.user_id}`);
         setUserInfo(response.data);
       } catch (error) {
         console.error('Error al obtener la información del usuario');
       }
     };
-
-    fetchUserInfo();
+  
+    if (sesionInfo && sesionInfo.user_id) {
+      fetchUserInfo();
+    }
   }, [sesionInfo]);
+  
 
   return (
     <div>
-      <LoginNavBar/>
+      <LoginNavBar username={userInfo ? userInfo.username : ''}    />
       <h1>Lista de las películas guardadas</h1>
       {userInfo ? (
         <div>
