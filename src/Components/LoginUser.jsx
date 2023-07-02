@@ -18,7 +18,7 @@ const LoginUser = () => {
         const response = await axios.post('http://localhost:8000/api/v1/login/', values);
         console.log(response.data);
         setSesionInfo(response.data);
-        navigate('/');
+        navigate('/movieform');
       } catch (error) {
         console.error('Error: Usuarios inválidos');
       }

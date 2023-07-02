@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 function MovieForm() {
@@ -185,7 +186,15 @@ function MovieForm() {
             className="w-full h-auto mb-2 hover:opacity-70 cursor-pointer"
           />
           <p className="italic font-semibold py-4 px-2">{movie.overview}</p>
-          <a href={streaming(movie.id, 'CL')} className="text-blue-500 hover:text-blue-700 block text-center">VER PELÍCULA</a>
+          <a href={streaming(movie.id, 'CL')} className="text-blue-500 hover:text-blue-700 block text-center">¿Donde ver la pelicula?</a>
+          <Link to='movielist'>
+          <div className="flex justify-center mt-4">
+      <button className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-red-500 hover:via-pink-500 hover:to-purple-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
+        Añadir a lista
+      </button>
+     
+    </div>
+    </Link>
         </div>
       );}))}  
       </div>
