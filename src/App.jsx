@@ -8,6 +8,7 @@ import Inicio from "./Components/Inicio";
 import Registro from "./Components/Registro";
 import LoginUser from "./Components/LoginUser";
 import Condition from "./Components/Condition";
+import Manual from "./Components/Manual";
 import SesionContext from "./context/SesionContext";
 import { useState } from "react";
 
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/login" element={<LoginUser />} />
           <Route path="/register" element={<Registro />} />
           <Route path="/condition" element={<Condition />} />
+          <Route path="/manual" element={<Manual />} />
           <Route path="/movieform" element={<MovieForm />} />
           <Route path="/movielist" element={<MovieList />} />
           <Route path="*" element={<NotFound />} />
