@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import LoginNavBar from "./LoginNavBar";
 
 
 function MovieForm() {
-  function randomPage(min, max) {
+  function randomPage(min, max) { 
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
@@ -39,7 +41,10 @@ function MovieForm() {
   }, [formValues]);
   return (
     <>
-      <h1 className="text-5xl text-center">Busca una película 🎬🍿</h1>
+    <LoginNavBar/>
+<h1 className="text-5xl  font-extrabold text-center font-bold text-dark-blue-700 m-3 p-3">
+  Busca una película <span role="img" aria-label="Film and popcorn">🎬🍿</span>
+</h1>
       <div className="container">
         <Formik
           initialValues={{
@@ -47,13 +52,6 @@ function MovieForm() {
             year: "",
             language: "",
           }}
-          // validate={(valores) => {
-          //   let errores = {};
-          //   if (!valores.genre) {
-          //     errores.genre = "Please, fill out this field";
-          //   }
-          //   return errores;
-          // }}
           onSubmit={(valores, { resetForm }) => {
             setFormValues(valores);
 
@@ -63,13 +61,11 @@ function MovieForm() {
           {({ values, errors, handleSubmit, handleChange, handleBlur }) => (
             <form
               onSubmit={handleSubmit}
-              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-            >
+              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
               <div className="mb-4">
                 <label
                   htmlFor="genre"
-                  className="block text-gray-700 font-bold mb-2"
-                >
+                  className="block text-gray-700 font-bold mb-2">
                   Género
                 </label>
                 <select
@@ -105,8 +101,7 @@ function MovieForm() {
               <div className="mb-4">
                 <label
                   htmlFor="year"
-                  className="block text-gray-700 font-bold mb-2"
-                >
+                  className="block text-gray-700 font-bold mb-2">
                   Año
                 </label>
                 <input
@@ -122,8 +117,7 @@ function MovieForm() {
               <div className="mb-6">
                 <label
                   htmlFor="language"
-                  className="block text-gray-700 font-bold mb-2"
-                >
+                  className="block text-gray-700 font-bold mb-2">
                   Idioma
                 </label>
                 <select
@@ -134,14 +128,14 @@ function MovieForm() {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 >
                   <option value="">Seleccione un idioma</option>
-                  <option value="es">español</option>
+                  <option value="es">Español</option>
                   <option value="it">Italiano</option>
                   <option value="en">Inglés</option>
                   <option value="ja">Japonés</option>
                   <option value="de">Alemán</option>
                   <option value="fr">Francés</option>
                   <option value="sr">Serbio</option>
-                  <option value="th">tailandés</option>
+                  <option value="th">Tailandés</option>
                   <option value="ko">Coreano</option>
                   <option value="ru">Ruso</option>
                   <option value="pt">Portugués</option>
@@ -157,10 +151,10 @@ function MovieForm() {
                   <option value="zh">Chino</option>
                 </select>
               </div>
-              <div className="flex items-center justify-between">
+              <div className="d-flex justify-content-center">
                 <button
                   type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="btn btn-info "
                 >
                   Buscar
                 </button>
@@ -170,34 +164,47 @@ function MovieForm() {
         </Formik>
         <div>
           <div className="grid grid-cols-4 gap-4">
-            {movies.results.length <= 0
-              ? "no hay nada"
-              : movies.results.map((movie) => {
-                  return (
-                    <div key={movie.id} className="movie-container">
-                      <p className="text-lg font-bold mb-2">
-                        {movie.original_title}
-                      </p>
-                      <a href={streaming(movie.id,'CL')}>
-                        {" "}
-                        <img
-                          src={
-                            "https://image.tmdb.org/t/p/w500/" +
-                            movie.poster_path
-                          }
-                          alt=""
-                          className="w-48 h-auto mb-2 hover:opacity-70 cursor-pointer"
-                        />
-                      </a>
-                      <p>{movie.overview}</p>
-                    </div>
-                  );
-                })}
+            {movies.results.length <= 0 ? (
+              <div className="col-span-4 flex justify-center">
+            <div className="max-w-sm text-center rounded overflow-hidden shadow-lg bg-blue-100">
+          <p className="text-lg font-bold font-extrabold mb-2 text-blue-520">
+        Lo sentimos... <br></br> No se encontró ningún resultado
+        <img
+            src={"https://st2.depositphotos.com/1001911/7684/v/950/depositphotos_76840879-stock-illustration-depressed-emoticon.jpg" }
+            alt=""
+            className="w-full h-auto mb-2 hover:opacity-70 cursor-pointer"
+          />
+          </p>
           </div>
+          </div>
+        ) : (
+         movies.results.map((movie) => {
+          return (
+          <div key={movie.id} className="max-w-sm rounded overflow-hidden shadow-lg">
+          <p className="text-lg font-bold mb-2 block text-center">{movie.original_title}</p>
+          <img
+            src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}
+            alt=""
+            className="w-full h-auto mb-2 hover:opacity-70 cursor-pointer"
+          />
+          <p className="italic font-semibold py-4 px-2">{movie.overview}</p>
+          <a href={streaming(movie.id, 'CL')} className="text-blue-500 hover:text-blue-700 block text-center">¿Donde ver la pelicula?</a>
+          <Link to='movielist'>
+          <div className="flex justify-center mt-4">
+      <button className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-red-500 hover:via-pink-500 hover:to-purple-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
+        Añadir a lista
+      </button>
+     
+    </div>
+    </Link>
         </div>
+      );}))}  
       </div>
+        </div>
+   </div>
     </>
   );
 }
+
 
 export default MovieForm;
