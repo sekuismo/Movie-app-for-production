@@ -16,21 +16,6 @@ const App = () => {
   const [sesionInfo, setSesionInfo] = useState(null);
 
   return (
-<<<<<<< HEAD
-    <div>
-      <Routes>
-        <Route path="/" />
-        <Route path="/movieform" element={<MovieForm />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <h1>hola</h1>
-      {isAuthenticated ? <Logout /> : <LoginButton />}
-      <br />
-      <Profile />
-
-      <MovieForm/>
-    </div>
-=======
     <SesionContext.Provider value={{ sesionInfo, setSesionInfo }}>
       <div>
         <Routes>
@@ -48,7 +33,6 @@ const App = () => {
         <Profile />
       </div>
     </SesionContext.Provider>
->>>>>>> origin/main
   );
 };
 

@@ -110,14 +110,14 @@ const LoginUser = () => {
           )}
         </div>
         <div className="flex items-center justify-center">
-          <Link
-            to="/movieform"
+          <button
+         
             className="bg-customColor hover:bg-opacity-75 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
             disabled={formik.isSubmitting}
           >
             Ingresar
-          </Link>
+          </button>
         </div>
 
 
