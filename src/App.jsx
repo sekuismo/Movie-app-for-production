@@ -8,6 +8,7 @@ import Profile from "./Components/Profile";
 import LoginUser from "./Components/LoginUser";
 import Inicio from "./Components/Inicio";
 import Registro from "./Components/Registro";
+import MovieList from "./Components/MovieList";
 
 const App = () => {
   const { isAuthenticated,isLoading } = useAuth0();
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/" />
         <Route path="/movieform" element={<MovieForm />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/movielist" element={<MovieList/>} />
       </Routes>
       <Inicio />
       <LoginUser />
