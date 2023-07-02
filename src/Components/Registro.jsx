@@ -1,4 +1,3 @@
-//aquí empiezaa ------------------------------------------------------------------------------------------------------
 import React from "react";
 import { Formik, useFormik } from "formik";
 import axios from "axios";

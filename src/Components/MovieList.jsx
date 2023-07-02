@@ -38,4 +38,8 @@ function MovieList({ sesionInfo }) {
   );
 }
 
+<<<<<<< HEAD
 export default MovieList;
+=======
+export default MovieList;
+>>>>>>> origin/developMp
