@@ -1,9 +1,9 @@
-import { useFormik } from 'formik';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import SesionContext from '../context/SesionContext';
-import { Link } from 'react-router-dom';
+import { useFormik } from "formik";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import SesionContext from "../context/SesionContext";
+import { Link } from "react-router-dom";
 
 const LoginUser = () => {
   const navigate = useNavigate();
@@ -78,8 +78,9 @@ const LoginUser = () => {
             placeholder="Ingrese su nombre"
             value={formik.values.username}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {formik.errors.username && (
+          {formik.errors.username && formik.touched.username && (
             <p className="text-red-500 text-sm mt-1">
               {formik.errors.username}
             </p>
@@ -94,7 +95,9 @@ const LoginUser = () => {
           </label>
           <input
             className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-              formik.errors.password ? "border-red-500" : ""
+              formik.errors.password && formik.touched.password
+                ? "border-red-500"
+                : ""
             }`}
             id="password"
             name="password"
@@ -102,8 +105,10 @@ const LoginUser = () => {
             placeholder="Ingrese su contraseña"
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
-          {formik.errors.password && (
+
+          {formik.errors.password && formik.touched.password && (
             <p className="text-red-500 text-sm mt-1">
               {formik.errors.password}
             </p>
@@ -111,7 +116,6 @@ const LoginUser = () => {
         </div>
         <div className="flex items-center justify-center">
           <button
-         
             className="bg-customColor hover:bg-opacity-75 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
             disabled={formik.isSubmitting}
@@ -120,12 +124,9 @@ const LoginUser = () => {
           </button>
         </div>
 
-
         {formik.status && (
           <p className="text-red-500 text-sm mt-1">{formik.status}</p>
         )}
-
-
       </form>
 
       <footer className="bg-gray-200 py-4 fixed bottom-0 left-0 w-full">
@@ -137,9 +138,11 @@ const LoginUser = () => {
             |{" "}
             <Link to="/manual" className="text-gray-600 hover:text-gray-800">
               Manual de usuario
-            </Link>
-            {" "} | Desarrollado por{" "}
-            <span className="font-semibold">Esteban Muñoz y María Paz Valenzuela</span>
+            </Link>{" "}
+            | Desarrollado por{" "}
+            <span className="font-semibold">
+              Esteban Muñoz y María Paz Valenzuela
+            </span>
           </div>
         </div>
       </footer>

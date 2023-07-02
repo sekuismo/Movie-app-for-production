@@ -1,10 +1,14 @@
 import React from "react";
+import { useState } from "react";
 import { Formik, useFormik } from "formik";
 import axios from "axios";
-import * as Yup from 'yup';
-import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import { Link, useNavigate } from "react-router-dom";
+import Inicio from "./Inicio";
 
 const Registro = () => {
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = async (values) => {
     try {
       const formData = {
@@ -22,11 +26,15 @@ const Registro = () => {
         formData
       );
       console.log(response.data);
-      // Resto del código...
+      setShowModal(true);
     } catch (error) {
       console.error(error);
       // Resto del código...
     }
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+    navigate("/login");
   };
 
   const formik = useFormik({
@@ -275,211 +283,247 @@ const Registro = () => {
 
   return (
     <div>
-    <div className="max-w-md mx-auto mt-8 bg-gray-300 bg-opacity-50">
-      <div className="max-w-md mx-auto mt-8 bg-gray-300 bg-opacity-50">
-        <h2 className="text-center text-2xl font-bold mb-4">
-          Registrar usuario
-        </h2>
-        <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          onSubmit={formik.handleSubmit}
-        >
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="nombre"
-            >
-              Usuario
-            </label>
-            <input
-              className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                formik.touched.nombre && formik.errors.nombre
-                  ? "border-red-500"
-                  : ""
-              }`}
-              id="nombre"
-              name="nombre"
-              type="text"
-              placeholder="Ingrese su nombre de usuario"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.nombre}
-            />
-            {formik.touched.nombre && formik.errors.nombre && (
-              <p className="text-red-500">{formik.errors.nombre}</p>
-            )}
+      <div>
+        {showModal && (
+          <div className="fixed z-10 inset-0 flex items-center justify-center overflow-y-auto bg-gray-500 bg-opacity-75">
+            <div className="bg-white rounded-lg text-center p-8">
+              <div className="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mx-auto mb-4">
+                <svg
+                  className="h-6 w-6 text-green-600"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg leading-6 font-medium text-gray-900 mb-2">
+                Registro exitoso
+              </h3>
+              <p className="text-sm text-gray-500 mb-4">
+                Tu cuenta ha sido creada exitosamente.
+              </p>
+              <button
+                type="button"
+                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                onClick={handleCloseModal}
+              >
+                Cerrar
+              </button>
+            </div>
           </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="text"
-            >
-              Nombre
-            </label>
-            <input
-              className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                formik.touched.username && formik.errors.username
-                  ? "border-red-500"
-                  : ""
-              }`}
-              id="text"
-              name="username"
-              type="text"
-              placeholder="Ingrese su nombre"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.username}
-            />
-            {formik.touched.username && formik.errors.username && (
-              <p className="text-red-500">{formik.errors.username}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="apellido"
-            >
-              Apellido
-            </label>
-            <input
-              className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                formik.touched.apellido && formik.errors.apellido
-                  ? "border-red-500"
-                  : ""
-              }`}
-              id="apellido"
-              name="apellido"
-              type="text"
-              placeholder="Ingrese su apellido"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.apellido}
-            />
-            {formik.touched.apellido && formik.errors.apellido && (
-              <p className="text-red-500">{formik.errors.apellido}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                formik.touched.email && formik.errors.email
-                  ? "border-red-500"
-                  : ""
-              }`}
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Ingrese su email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            {formik.touched.email && formik.errors.email && (
-              <p className="text-red-500">{formik.errors.email}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Contraseña
-            </label>
-            <input
-              className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                formik.touched.password && formik.errors.password
-                  ? "border-red-500"
-                  : ""
-              }`}
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Ingrese su contraseña"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
-            {formik.touched.password && formik.errors.password && (
-              <p className="text-red-500">{formik.errors.password}</p>
-            )}
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="confirmarPassword"
-            >
-              Confirmar Contraseña
-            </label>
-            <input
-              className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                formik.touched.confirmarPassword &&
-                formik.errors.confirmarPassword
-                  ? "border-red-500"
-                  : ""
-              }`}
-              id="confirmarPassword"
-              name="confirmarPassword"
-              type="password"
-              placeholder="Confirme su contraseña"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.confirmarPassword}
-            />
-            {formik.touched.confirmarPassword &&
-              formik.errors.confirmarPassword && (
-                <p className="text-red-500">
-                  {formik.errors.confirmarPassword}
-                </p>
-              )}
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="pais"
-            >
-              País
-            </label>
-            <select
-              className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                formik.touched.pais && formik.errors.pais
-                  ? "border-red-500"
-                  : ""
-              }`}
-              id="pais"
-              name="pais"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.pais}
-            >
-              {Object.entries(paisesInvertidos).map(([code, name]) => (
-                <option key={code} value={code}>
-                  {name}
-                </option>
-              ))}
-            </select>
-            {formik.touched.pais && formik.errors.pais && (
-              <p className="text-red-500">{formik.errors.pais}</p>
-            )}
-          </div>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="bg-customColor hover:bg-opacity-75 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Registrarse
-            </button>
-          </div>
-        </form>
+        )}
       </div>
-      
-    </div>
-    <footer className="bg-gray-200 py-4 fixed bottom-0 left-0 w-full">
+      <div className="max-w-md mx-auto mt-8 bg-gray-300 bg-opacity-50">
+        <div className="max-w-md mx-auto mt-8 bg-gray-300 bg-opacity-50">
+          <h2 className="text-center text-2xl font-bold mb-4">
+            Registrar usuario
+          </h2>
+          <form
+            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            onSubmit={formik.handleSubmit}
+          >
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="nombre"
+              >
+                Usuario
+              </label>
+              <input
+                className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  formik.touched.nombre && formik.errors.nombre
+                    ? "border-red-500"
+                    : ""
+                }`}
+                id="nombre"
+                name="nombre"
+                type="text"
+                placeholder="Ingrese su nombre de usuario"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.nombre}
+              />
+              {formik.touched.nombre && formik.errors.nombre && (
+                <p className="text-red-500">{formik.errors.nombre}</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="text"
+              >
+                Nombre
+              </label>
+              <input
+                className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  formik.touched.username && formik.errors.username
+                    ? "border-red-500"
+                    : ""
+                }`}
+                id="text"
+                name="username"
+                type="text"
+                placeholder="Ingrese su nombre"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.username}
+              />
+              {formik.touched.username && formik.errors.username && (
+                <p className="text-red-500">{formik.errors.username}</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="apellido"
+              >
+                Apellido
+              </label>
+              <input
+                className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  formik.touched.apellido && formik.errors.apellido
+                    ? "border-red-500"
+                    : ""
+                }`}
+                id="apellido"
+                name="apellido"
+                type="text"
+                placeholder="Ingrese su apellido"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.apellido}
+              />
+              {formik.touched.apellido && formik.errors.apellido && (
+                <p className="text-red-500">{formik.errors.apellido}</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  formik.touched.email && formik.errors.email
+                    ? "border-red-500"
+                    : ""
+                }`}
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Ingrese su email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              {formik.touched.email && formik.errors.email && (
+                <p className="text-red-500">{formik.errors.email}</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="password"
+              >
+                Contraseña
+              </label>
+              <input
+                className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  formik.touched.password && formik.errors.password
+                    ? "border-red-500"
+                    : ""
+                }`}
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Ingrese su contraseña"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {formik.touched.password && formik.errors.password && (
+                <p className="text-red-500">{formik.errors.password}</p>
+              )}
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="confirmarPassword"
+              >
+                Confirmar Contraseña
+              </label>
+              <input
+                className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  formik.touched.confirmarPassword &&
+                  formik.errors.confirmarPassword
+                    ? "border-red-500"
+                    : ""
+                }`}
+                id="confirmarPassword"
+                name="confirmarPassword"
+                type="password"
+                placeholder="Confirme su contraseña"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.confirmarPassword}
+              />
+              {formik.touched.confirmarPassword &&
+                formik.errors.confirmarPassword && (
+                  <p className="text-red-500">
+                    {formik.errors.confirmarPassword}
+                  </p>
+                )}
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="pais"
+              >
+                País
+              </label>
+              <select
+                className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  formik.touched.pais && formik.errors.pais
+                    ? "border-red-500"
+                    : ""
+                }`}
+                id="pais"
+                name="pais"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.pais}
+              >
+                {Object.entries(paisesInvertidos).map(([code, name]) => (
+                  <option key={code} value={code}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              {formik.touched.pais && formik.errors.pais && (
+                <p className="text-red-500">{formik.errors.pais}</p>
+              )}
+            </div>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="bg-customColor hover:bg-opacity-75 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Registrarse
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <footer className="bg-gray-200 py-4 fixed bottom-0 left-0 w-full">
         <div className="container mx-auto px-4 text-center">
           <div className="text-gray-600 text-sm">
             <Link to="/condition" className="text-gray-600 hover:text-gray-800">
@@ -488,9 +532,11 @@ const Registro = () => {
             |{" "}
             <Link to="/manual" className="text-gray-600 hover:text-gray-800">
               Manual de usuario
-            </Link>
-            {" "} | Desarrollado por{" "}
-            <span className="font-semibold">Esteban Muñoz y María Paz Valenzuela</span>
+            </Link>{" "}
+            | Desarrollado por{" "}
+            <span className="font-semibold">
+              Esteban Muñoz y María Paz Valenzuela
+            </span>
           </div>
         </div>
       </footer>
