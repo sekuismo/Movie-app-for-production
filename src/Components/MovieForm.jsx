@@ -3,6 +3,9 @@ import { Formik } from "formik";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import LoginNavBar from "./LoginNavBar";
+import AddToList from "./AddToList";
+
+// API PARA CADA PELÍCULA https://api.themoviedb.org/3/movie/153158?api_key=4e6dcbd1460fb66d632cfc4c69445c30
 
 function MovieForm() {
   function randomPage(min, max) {
@@ -13,6 +16,7 @@ function MovieForm() {
   const [formValues, setFormValues] = useState([]);
   const [movies, setMovies] = useState({ results: [] });
   const [yearError, setYearError] = useState("");
+  const [showNoResultsMessage, setShowNoResultsMessage] = useState(false);
 
   const API =
     "https://api.themoviedb.org/3/discover/movie?api_key=4e6dcbd1460fb66d632cfc4c69445c30";
@@ -36,6 +40,7 @@ function MovieForm() {
       const data = await response.data;
       console.log(data);
       setMovies(data);
+      setShowNoResultsMessage(data.results.length === 0);
     };
     getData();
     console.log(movies);
@@ -59,7 +64,9 @@ function MovieForm() {
           onSubmit={(valores, { resetForm }) => {
             setFormValues(valores);
             const { year } = valores;
-            if (year < 1895 || year > 2024) {
+            if (year === "") {
+              setYearError("");
+            } else if (year < 1895 || year > 2024) {
               if (year > 2024) {
                 setYearError("Aún no hemos llegado a ese año 🙄");
               } else {
@@ -186,14 +193,14 @@ function MovieForm() {
                 <div className="max-w-sm text-center rounded overflow-hidden shadow-lg bg-blue-100">
                   <p className="text-lg font-bold font-extrabold mb-2 text-blue-520">
                     Lo sentimos... <br></br> No se encontró ningún resultado
-                    <img
-                      src={
-                        "https://st2.depositphotos.com/1001911/7684/v/950/depositphotos_76840879-stock-illustration-depressed-emoticon.jpg"
-                      }
-                      alt=""
-                      className="w-full h-auto mb-2 hover:opacity-70 cursor-pointer"
-                    />
                   </p>
+                  <img
+                    src={
+                      "https://st2.depositphotos.com/1001911/7684/v/950/depositphotos_76840879-stock-illustration-depressed-emoticon.jpg"
+                    }
+                    alt=""
+                    className="w-full h-auto mb-2 hover:opacity-70 cursor-pointer"
+                  />
                 </div>
               </div>
             ) : (
@@ -222,13 +229,10 @@ function MovieForm() {
                     >
                       ¿Donde ver la pelicula?
                     </a>
-                    <Link to="movielist">
-                      <div className="flex justify-center mt-4">
-                        <button className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-red-500 hover:via-pink-500 hover:to-purple-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
-                          Añadir a lista
-                        </button>
-                      </div>
-                    </Link>
+
+                    <div className="flex justify-center mt-4">
+                      <AddToList movie={movie} />
+                    </div>
                   </div>
                 );
               })
