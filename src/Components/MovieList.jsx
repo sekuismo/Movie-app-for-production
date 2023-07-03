@@ -5,7 +5,7 @@ import LoginNavBar from './LoginNavBar';
 
 function MovieList() {
   const [userInfo, setUserInfo] = useState(null);
-  const { sesionInfo } = useContext(SesionContext); // Obtener sesionInfo del contexto
+  const { sesionInfo } = useContext(SesionContext);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -24,11 +24,11 @@ function MovieList() {
 
   const handleDeleteMovie = async (movieId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/v1/movies/${movieId}`);
+      await axios.delete(`http://localhost:8000/api/v1/listas/${userInfo.id}/${movieId}/`);
       // Actualizar el estado para refrescar la lista de películas
       setUserInfo((prevUserInfo) => ({
         ...prevUserInfo,
-        movie_lists: prevUserInfo.movie_lists.filter((movie) => movie.id !== movieId),
+        movie_lists: prevUserInfo.movie_lists.filter((movie) => movie.movie.id !== movieId),
       }));
     } catch (error) {
       console.error('Error al eliminar la película');
@@ -37,49 +37,29 @@ function MovieList() {
 
   const handleToggleViewed = async (movieId, isViewed) => {
     try {
+      const movieIndex = userInfo.movie_lists.findIndex((movie) => movie.movie.id === movieId);
+      if (movieIndex === -1) {
+        console.error('No se encontró la película correspondiente al ID');
+        return;
+      }
+
       const updatedMovie = {
+        ...userInfo.movie_lists[movieIndex],
         is_viewed: isViewed,
       };
-      await axios.put(`http://localhost:8000/api/v1/listadepeliculas/${movieId}/`, updatedMovie);
+
+      await axios.put(`http://localhost:8000/api/v1/listas/${updatedMovie.id}/`, updatedMovie);
       // Actualizar el estado para refrescar la lista de películas
-      setUserInfo((prevUserInfo) => ({
-        ...prevUserInfo,
-        movie_lists: prevUserInfo.movie_lists.map((movie) => {
-          if (movie.id === movieId) {
-            return {
-              ...movie,
-              is_viewed: isViewed,
-            };
-          }
-          return movie;
-        }),
-      }));
+      setUserInfo((prevUserInfo) => {
+        const updatedMovieLists = [...prevUserInfo.movie_lists];
+        updatedMovieLists[movieIndex] = updatedMovie;
+        return {
+          ...prevUserInfo,
+          movie_lists: updatedMovieLists,
+        };
+      });
     } catch (error) {
       console.error('Error al actualizar el atributo "is_viewed"');
-    }
-  };
-
-  const handleToggleErased = async (movieId, isErased) => {
-    try {
-      const updatedMovie = {
-        is_erased: isErased,
-      };
-      await axios.put(`http://localhost:8000/api/v1/listadepeliculas/${movieId}/`, updatedMovie);
-      // Actualizar el estado para refrescar la lista de películas
-      setUserInfo((prevUserInfo) => ({
-        ...prevUserInfo,
-        movie_lists: prevUserInfo.movie_lists.map((movie) => {
-          if (movie.id === movieId) {
-            return {
-              ...movie,
-              is_erased: isErased,
-            };
-          }
-          return movie;
-        }),
-      }));
-    } catch (error) {
-      console.error('Error al actualizar el atributo "is_erased"');
     }
   };
 
@@ -100,25 +80,12 @@ function MovieList() {
                 <input
                   type="checkbox"
                   checked={movie.is_viewed}
-                  onChange={(e) => handleToggleViewed(movie.id, e.target.checked)}
+                  onChange={(e) => handleToggleViewed(movie.movie.id, e.target.checked)}
                   className="ml-2 form-toggle-switch"
                 />
+                <span className="form-toggle-switch-slider" />
               </label>
-              <label className="flex items-center mb-2">
-                Eliminado:
-                <input
-                  type="checkbox"
-                  checked={movie.is_erased}
-                  onChange={(e) => handleToggleErased(movie.id, e.target.checked)}
-                  className="ml-2 form-toggle-switch"
-                />
-              </label>
-              <button
-                onClick={() => handleDeleteMovie(movie.id)}
-                className="bg-red-500 text-white py-1 px-2 rounded"
-              >
-                Eliminar
-              </button>
+
             </div>
           ))
         ) : (
