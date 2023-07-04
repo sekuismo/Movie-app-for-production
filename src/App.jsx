@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import MovieForm from "./Components/MovieForm";
 import MovieList from "./Components/MovieList";
 import "./index.css";
@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <SesionContext.Provider value={{ sesionInfo, setSesionInfo }}>
-      <HashRouter basename="/app">  
+       
       <div>
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -33,7 +33,7 @@ const App = () => {
         <br />
         <Profile />
       </div>
-      </HashRouter>
+      
     </SesionContext.Provider>
   );
 };
