@@ -1,10 +1,12 @@
 // Componente MovieItem
 
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 function MovieItem({ movie, handleToggleViewed, handleDeleteMovie }) {
-  const { id, movie_id, img_url, title, genre_name, date_added, is_viewed } = movie;
+    
+  const { id, movie_id, img_url, title, genre_name, date_added, is_viewed } =
+    movie;
 
   const handleToggle = async () => {
     try {
@@ -17,7 +19,10 @@ function MovieItem({ movie, handleToggleViewed, handleDeleteMovie }) {
         user: movie.user,
       };
 
-      await axios.put(`http://localhost:8000/api/v1/listas/${id}/`, updatedMovie);
+      await axios.put(
+        `http://localhost:8000/api/v1/listas/${id}/`,
+        updatedMovie
+      );
       handleToggleViewed(id, !is_viewed);
     } catch (error) {
       console.error('Error al actualizar el atributo "is_viewed"');
@@ -28,28 +33,44 @@ function MovieItem({ movie, handleToggleViewed, handleDeleteMovie }) {
     try {
       await axios.delete(`http://localhost:8000/api/v1/listas/${id}/`);
       handleDeleteMovie(id);
+      alert('película eliminada!')
     } catch (error) {
-      console.error('Error al eliminar la película');
+      console.error("Error al eliminar la película");
     }
   };
 
   return (
     <div className="movie-card bg-white p-4 rounded shadow">
-      <img src={img_url} alt={title} className="w-full h-auto mb-4" />
-      <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <p className="mb-2">Fecha de Agregado: {date_added}</p>
-      <p className="mb-2">Género: {genre_name}</p>
+      <img
+        src={movie.movie.img_url}
+        alt={title}
+        className="w-full h-auto mb-4"
+      />
+      <h2 className="text-xl font-bold mb-2">{movie.movie.title}</h2>
+      <p className="mb-2">{movie.movie.description}</p>
       <label className="flex items-center mb-2">
-        Visto:
+        Película vista
         <input
           type="checkbox"
           checked={is_viewed}
           onChange={handleToggle}
-          className="ml-2 form-toggle-switch"
+          className="ml-2 form-toggle-switch w-6 h-6"
         />
         <span className="form-toggle-switch-slider" />
       </label>
-      <button onClick={handleDelete}>Eliminar</button>
+
+      <div className="my-4">
+  <button
+    onClick={handleDelete}
+    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+  >
+    Eliminar
+  </button>
+</div>
+
+      <p className="mb-2">
+        Fecha de Agregado: {new Date(date_added).toLocaleString()}
+      </p>
     </div>
   );
 }

@@ -8,7 +8,6 @@ import MovieItem from './MovieItem';
 
 function MovieList() {
   const [userInfo, setUserInfo] = useState(null);
-  const [renderMovie,setRendedMovie] = useState(null)
   const { sesionInfo } = useContext(SesionContext);
 
   useEffect(() => {
@@ -16,7 +15,6 @@ function MovieList() {
       try {
         const response = await axios.get(`http://localhost:8000/api/v1/users/${sesionInfo.user_id}`);
         setUserInfo(response.data);
-        setRendedMovie(response.data)
       } catch (error) {
         console.error('Error al obtener la información del usuario');
       }
@@ -54,7 +52,6 @@ function MovieList() {
       };
     });
   };
-
   return (
     <div>
       <LoginNavBar username={userInfo ? userInfo.username : ''} />
@@ -62,12 +59,15 @@ function MovieList() {
       <div className="grid grid-cols-4 gap-3">
         {userInfo && userInfo.movie_lists ? (
           userInfo.movie_lists.map((movie) => (
+            <div>
+              {console.log(movie.movie)}
             <MovieItem
-              key={movie.id}
-              movie={movie}
-              handleToggleViewed={handleToggleViewed}
-              handleDeleteMovie={handleDeleteMovie}
+            key={movie.id} 
+            movie={movie}
+            handleToggleViewed={handleToggleViewed}
+            handleDeleteMovie={handleDeleteMovie}
             />
+            </div>
           ))
         ) : (
           <p>Cargando...</p>
