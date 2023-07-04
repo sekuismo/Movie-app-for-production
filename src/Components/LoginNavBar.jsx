@@ -29,19 +29,19 @@ function LoginNavBar() {
       <nav className="bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center py-4">
-            <div className="text-white text-5xl font-sans font-serif font-semibold">
-              {`Bienvenido/a ${username}`}
+            <div className="text-white text-4xl font-serif font-semibold font-thin tracking-wide">
+              {`Bienvenido/a    ${username}!`}
             </div>
             <div>
               <Link
                 to="/movieform"
-                className="text-gray-300 hover:text-white text-xl font-semibold py-2 px-4 ml-4 transition-colors duration-200"
+                className="bg-blue-500 hover:bg-blue-600 text-white text-xl font-semibold py-2 px-4 ml-4 rounded-lg transition-colors duration-200 no-underline"
               >
                 Buscar películas
               </Link>
               <Link
                 to="/movielist"
-                className="bg-blue-500 hover:bg-blue-600 text-white text-xl font-semibold py-2 px-4 ml-4 rounded-lg transition-colors duration-200"
+                className="bg-blue-500 hover:bg-blue-600 text-white text-xl font-semibold py-2 px-4 ml-4 rounded-lg transition-colors duration-200 no-underline"
               >
                 Favoritas
               </Link>
