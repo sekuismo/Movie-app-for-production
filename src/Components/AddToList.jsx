@@ -27,7 +27,7 @@ function AddToList({ movie }) {
       };
 
       const postResponse = await axios.post(
-        "http://localhost:8000/api/v1/peliculas/",
+        "https://movies-app-backend-4a4q.onrender.com/api/v1/peliculas/",
         postData
       );
 
