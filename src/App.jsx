@@ -17,6 +17,7 @@ const App = () => {
 
   return (
     <SesionContext.Provider value={{ sesionInfo, setSesionInfo }}>
+      <HashRouter basename="/app">  
       <div>
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -32,6 +33,7 @@ const App = () => {
         <br />
         <Profile />
       </div>
+      </HashRouter>
     </SesionContext.Provider>
   );
 };
