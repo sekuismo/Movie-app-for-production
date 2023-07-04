@@ -13,7 +13,7 @@ function MovieList() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/v1/users/${sesionInfo.user_id}`);
+        const response = await axios.get(`https://movies-app-backend-4a4q.onrender.com/api/v1/users/${sesionInfo.user_id}`);
         setUserInfo(response.data);
       } catch (error) {
         console.error('Error al obtener la información del usuario');
@@ -27,7 +27,7 @@ function MovieList() {
 
   const handleDeleteMovie = async (movieId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/v1/listas/${movieId}/`);
+      await axios.delete(`https://movies-app-backend-4a4q.onrender.com/api/v1/listas/${movieId}/`);
       setUserInfo((prevUserInfo) => ({
         ...prevUserInfo,
         movie_lists: prevUserInfo.movie_lists.filter((movie) => movie.id !== movieId),

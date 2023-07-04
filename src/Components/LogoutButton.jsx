@@ -14,7 +14,7 @@ const LogoutButton = () => {
       const token = user.access;
 
       // Realiza la solicitud POST para cerrar sesión
-      const response = await fetch('http://127.0.0.1:8000/api/v1/logout/', {
+      const response = await fetch('https://movies-app-backend-4a4q.onrender.com/api/v1/logout/', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

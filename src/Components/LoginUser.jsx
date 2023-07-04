@@ -31,7 +31,7 @@ const LoginUser = () => {
     onSubmit: async (values, { setSubmitting }) => {
       try {
         const response = await axios.post(
-          "http://localhost:8000/api/v1/login/",
+          "https://movies-app-backend-4a4q.onrender.com/api/v1/login/",
           values
         );
         console.log(response.data);

@@ -31,7 +31,7 @@ function MovieItem({ movie, handleToggleViewed, handleDeleteMovie }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/v1/listas/${id}/`);
+      await axios.delete(`https://movies-app-backend-4a4q.onrender.com/api/v1/listas/${id}/`);
       handleDeleteMovie(id);
       alert('película eliminada!')
       window.location.reload()

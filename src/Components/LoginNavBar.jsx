@@ -21,7 +21,7 @@ function LoginNavBar() {
     const fetchUsername = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/v1/users/${sesionInfo.user_id}`
+          `https://movies-app-backend-4a4q.onrender.com/api/v1/users/${sesionInfo.user_id}`
         );
         setUsername(response.data.username);
       } catch (error) {

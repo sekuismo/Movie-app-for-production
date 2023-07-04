@@ -22,7 +22,7 @@ const Registro = () => {
       };
 
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/users/",
+        "https://movies-app-backend-4a4q.onrender.com/api/v1/users/",
         formData
       );
       console.log(response.data);
