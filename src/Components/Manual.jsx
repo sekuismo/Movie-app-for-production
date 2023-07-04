@@ -29,7 +29,7 @@ const Manual = () => {
             <br /><br />
             - Accede a la página de inicio de la aplicación.
             <br /><br />
-            - Haz clic en el enlace "Registrarse" para acceder al formulario de registro.
+            - Haz clic en el botón "Registrarse" para acceder al formulario de registro.
             <br /><br />
             - Completa todos los campos requeridos del formulario de registro con información precisa y actualizada.
             <br /><br />
@@ -37,7 +37,7 @@ const Manual = () => {
             <br /><br />
             Una vez que hayas creado tu cuenta, podrás iniciar sesión siguiendo estos pasos:
             <br /><br />
-            - En la página de inicio, haz clic en el enlace "Iniciar sesión".
+            - En la página de inicio, haz clic en el botón "Iniciar sesión".
             <br /><br />
             - Ingresa tu nombre de usuario y contraseña en los campos correspondientes del formulario de inicio de sesión.
             <br /><br />
@@ -63,21 +63,11 @@ const Manual = () => {
             <br /><br />
             <strong>4. Detalles de la película</strong>
             <br /><br />
-            Si deseas obtener más información sobre una película recomendada, puedes acceder a los detalles de la película. Sigue estos pasos:
+            Si deseas añadir la pelicula a tus favoritas, presiona el boton "añadir a lista" para que este en tu lista personalizada.
             <br /><br />
-            - Haz clic en el enlace de la película que deseas para ver más detalles y opciones de visualización.
+            - Haz clic en el enlace ¿Dónde ver película? y te redirigirá a una página en donde puedes ver en que plataforma está la pelicula.
             <br /><br />
-            - Se te redirigirá a una página con información detallada sobre la película.
-            <br /><br />
-            <strong>5. Lista para ver más tarde</strong>
-            <br /><br />
-            Si encuentras una película que te interesa pero no puedes ver en ese momento, puedes agregarla a tu lista personalizada para ver más tarde. Sigue estos pasos:
-            <br /><br />
-            - En la página de detalles de la película, busca el botón "Añadir a lista".
-            <br /><br />
-            - Haz clic en el botón para añadir la película a tu lista personalizada.
-            <br /><br />
-            <strong>6. Seguimiento de visualización</strong>
+            <strong>5. Seguimiento de visualización</strong>
             <br /><br />
             Si has visto una película de tu lista, puedes marcarla como vista. Sigue estos pasos:
             <br /><br />

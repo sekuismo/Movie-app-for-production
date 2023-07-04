@@ -4,7 +4,7 @@ import { Formik, useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import Inicio from "./Inicio";
+import NavbarRegistro from "./NavbarRegistro";
 
 const Registro = () => {
   const [showModal, setShowModal] = useState(false);
@@ -282,6 +282,7 @@ const Registro = () => {
   };
 
   return (
+    <><NavbarRegistro/>
     <div>
       <div>
         {showModal && (
@@ -541,6 +542,7 @@ const Registro = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

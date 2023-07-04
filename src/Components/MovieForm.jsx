@@ -48,7 +48,8 @@ function MovieForm() {
   return (
     <>
       <LoginNavBar />
-      <h1 className="text-5xl  font-extrabold text-center font-bold text-dark-blue-700 m-3 p-3">
+      <div className="bg-white shadow-lg border border-black rounded p-6 mb-4">
+      <h1 className="text-5xl  font-extrabold text-center font-bold text-dark-blue-700 m-2 p-2">
         Busca una película{" "}
         <span role="img" aria-label="Film and popcorn">
           🎬🍿
@@ -82,7 +83,7 @@ function MovieForm() {
           {({ values, errors, handleSubmit, handleChange, handleBlur }) => (
             <form
               onSubmit={handleSubmit}
-              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+              className="bg-white shadow-md border border-black rounded px-8 pt-6 pb-8 mb-4"
             >
               <div className="mb-4">
                 <label
@@ -182,13 +183,22 @@ function MovieForm() {
                 <button type="submit" className="btn btn-info ">
                   Buscar
                 </button>
+                
               </div>
+              
             </form>
           )}
         </Formik>
+        </div>
         <div>
           <div className="grid grid-cols-4 gap-4">
-            {movies.results.length <= 0 ? (
+            {movies.results.length === 0 ||
+             null || "" ||
+              movies.genre === "" ||
+               movies.id === "" ||
+                movies.year === null ||
+                 movies.language === ""
+             ? (
               <div className="col-span-4 flex justify-center">
                 <div className="max-w-sm text-center rounded overflow-hidden shadow-lg bg-blue-100">
                   <p className="text-lg font-bold font-extrabold mb-2 text-blue-520">
@@ -208,7 +218,7 @@ function MovieForm() {
                 return (
                   <div
                     key={movie.id}
-                    className="max-w-sm rounded overflow-hidden shadow-lg"
+                    className="max-w-sm rounded overflow-hidden border-2 border-blue-900 shadow-lg"
                   >
                     <p className="text-lg font-bold mb-2 block text-center">
                       {movie.original_title}
@@ -239,6 +249,24 @@ function MovieForm() {
             )}
           </div>
         </div>
+        <footer className="bg-gray-800 py-2 fixed bottom-0 left-0 w-full">
+  <div className="container mx-auto px-4 text-center">
+    <div className="text-gray-400 text-sm flex flex-wrap justify-center items-center">
+      <Link to="/condition" className="text-gray-400 hover:text-gray-200 px-2 py-1">
+        Términos y condiciones
+      </Link>{" "}
+      <span className="text-gray-400">|</span>{" "}
+      <Link to="/manual" className="text-gray-400 hover:text-gray-200 px-2 py-1">
+        Manual de usuario
+      </Link>{" "}
+      <span className="text-gray-400">|  </span>{" "}
+      <span className="text-gray-400"> Desarrollado por</span>{" "}
+      <span className="text-gray-100 font-semibold px-2 py-1">
+        Esteban Muñoz y María Paz Valenzuela
+      </span>
+    </div>
+  </div>
+</footer>
       </div>
     </>
   );

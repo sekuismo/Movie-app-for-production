@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import SesionContext from "../context/SesionContext";
 import { Link } from "react-router-dom";
+import NavbarRegistro from "./NavbarRegistro";
 
 const LoginUser = () => {
   const navigate = useNavigate();
@@ -55,6 +56,8 @@ const LoginUser = () => {
   });
 
   return (
+    <>
+    <NavbarRegistro/>
     <div className="max-w-md mx-auto mt-8 bg-gray-300 bg-opacity-50">
       <h2 className="text-center text-2xl font-bold mb-4">Iniciar sesión</h2>
       <form
@@ -147,6 +150,7 @@ const LoginUser = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 
