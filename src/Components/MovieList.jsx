@@ -55,7 +55,8 @@ function MovieList() {
   return (
     <div>
       <LoginNavBar username={userInfo ? userInfo.username : ''} />
-      <h1>Lista de las películas guardadas</h1>
+      <h1 className="text-3xl font-bold mb-4 text-center">Lista de las películas guardadas</h1>
+
       <div className="grid grid-cols-4 gap-3">
         {userInfo && userInfo.movie_lists ? (
           userInfo.movie_lists.map((movie) => (

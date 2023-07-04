@@ -330,12 +330,33 @@ const Registro = () => {
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
             onSubmit={formik.handleSubmit}
           >
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="text"
+                >
+                  username
+                </label>
+                <input
+                  className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                    formik.touched.username && formik.errors.username
+                      ? "border-red-500"
+                      : ""
+                  }`}
+                  id="text"
+                  name="username"
+                  type="text"
+                  placeholder="Ingrese su usuario"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.username}
+                />
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="nombre"
               >
-                Usuario
+                nombre
               </label>
               <input
                 className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
@@ -346,7 +367,7 @@ const Registro = () => {
                 id="nombre"
                 name="nombre"
                 type="text"
-                placeholder="Ingrese su nombre de usuario"
+                placeholder="Ingrese su nombre "
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.nombre}
@@ -355,27 +376,6 @@ const Registro = () => {
                 <p className="text-red-500">{formik.errors.nombre}</p>
               )}
             </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="text"
-              >
-                Nombre
-              </label>
-              <input
-                className={`border-b-2 border-gray-700 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                  formik.touched.username && formik.errors.username
-                    ? "border-red-500"
-                    : ""
-                }`}
-                id="text"
-                name="username"
-                type="text"
-                placeholder="Ingrese su nombre"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.username}
-              />
               {formik.touched.username && formik.errors.username && (
                 <p className="text-red-500">{formik.errors.username}</p>
               )}

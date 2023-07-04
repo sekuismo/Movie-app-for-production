@@ -34,6 +34,7 @@ function MovieItem({ movie, handleToggleViewed, handleDeleteMovie }) {
       await axios.delete(`http://localhost:8000/api/v1/listas/${id}/`);
       handleDeleteMovie(id);
       alert('película eliminada!')
+      window.location.reload()
     } catch (error) {
       console.error("Error al eliminar la película");
     }

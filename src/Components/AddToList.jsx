@@ -58,6 +58,8 @@ function AddToList({ movie }) {
       setIsAdded(true);
     } catch (error) {
       console.error("Error al realizar la operación:", error);
+      // Muestra la alerta de error
+      alert("NO se puede agregar esta película por ahora. Sitio en construcción 🚧👷‍♀️👷‍♂️");
     }
   };
 
