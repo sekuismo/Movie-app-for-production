@@ -20,7 +20,7 @@ function MovieItem({ movie, handleToggleViewed, handleDeleteMovie }) {
       };
 
       await axios.put(
-        `http://localhost:8000/api/v1/listas/${id}/`,
+        `https://movies-app-backend-4a4q.onrender.com/api/v1/listas/${id}/`,
         updatedMovie
       );
       handleToggleViewed(id, !is_viewed);
